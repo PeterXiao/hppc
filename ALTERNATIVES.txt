@@ -11,26 +11,24 @@ Nowadays there are a number of options to choose from (alphabetically).
   A very flexible, Apache licensed set of collections and algorithms. 
   Compatible with Java Collections.
 
-* HPPC-RT (by Vincent Sonnier), https://github.com/vsonnier/hppc
-  A fork of HPPC for real-time computing, minimizes allocations, introduces
-  overhead-less iterators and other miscellaneous goodies.
-  
 * Koloboke (by Roman Leventov), https://github.com/OpenHFT/Koloboke
   A very impressive library that offers unprecedented speed and features.
   Includes support for Java8 (including Collections compatibility).
 
-* Agrona, https://github.com/real-logic/agrona
+* Agrona, https://github.com/aeron-io/agrona
   Multiple data structures and tools for high performance computing, including
   primitive collections.
 
 * Eclipse Collections (formerly GS collections), https://www.eclipse.org/collections/
   Contains specialized classes for primitives as well. Includes Java8
-  support. Didn't analyze in more detail.
+  support.
 
-* Trove, https://bitbucket.org/robeden/trove/
-  If you're a GNU fan, this may be just the sweet spot for you.
+Archived or no longer maintained:
+
+* HPPC-RT (by Vincent Sonnier), https://github.com/vsonnier/hppcrt
+  A fork of HPPC for real-time computing, minimizes allocations, introduces
+  overhead-less iterators and other miscellaneous goodies.
 
 * PCJ (by Søren Bak), https://pcj.sourceforge.net/
   The grand-daddy of them all. :) DO NOT use it, it contains bugs. But it
   deserves to be mentioned nonetheless.
-
