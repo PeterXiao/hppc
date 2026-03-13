@@ -29,6 +29,7 @@ configurations {
   templateProcessor
   templatesImplementation.extendsFrom implementation
   testTemplatesImplementation.extendsFrom templatesImplementation, testImplementation
+  testTemplatesRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 dependencies {
@@ -95,7 +96,7 @@ task testTemplates(type: Test) {
   description = 'Runs source template tests.'
   group = 'verification'
 
-  useJUnit()
+  useJUnitPlatform()
 
   testClassesDirs = sourceSets.testTemplates.output.classesDirs
   classpath = sourceSets.testTemplates.runtimeClasspath
