@@ -41,8 +41,8 @@ dependencies {
 }
 
 task generateMainTemplates(type: GenerateTemplatesTask) {
-  templatesDir file("src/main/templates")
-  outputDir file("$buildDir/generated/main/templates")
+  templatesDir = file("src/main/templates")
+  outputDir = file("$buildDir/generated/main/templates")
 }
 
 compileJava {
@@ -55,8 +55,8 @@ compileJava {
 }
 
 task generateTestTemplates(type: GenerateTemplatesTask) {
-  templatesDir file("src/test/templates")
-  outputDir file("$buildDir/generated/test/templates")
+  templatesDir = file("src/test/templates")
+  outputDir = file("$buildDir/generated/test/templates")
 }
 
 spotless {
@@ -68,7 +68,7 @@ spotless {
     bumpThisNumberIfACustomStepChanges(1)
     custom 'cleanimports', { str -> str.replaceAll('/\\*\\s*\\*/', "") }
 
-    lineEndings 'UNIX'
+    lineEndings = 'UNIX'
     endWithNewline()
     googleJavaFormat(deps.versions.googleJavaFormat.get())
   })
@@ -104,7 +104,7 @@ task testTemplates(type: Test) {
 test.mustRunAfter testTemplates
 check.dependsOn(testTemplates)
 
-class GenerateTemplatesTask extends DefaultTask {
+abstract class GenerateTemplatesTask extends DefaultTask {
   @InputDirectory
   File templatesDir
 
@@ -113,6 +113,8 @@ class GenerateTemplatesTask extends DefaultTask {
 
   @Input
   boolean incremental = true
+
+  @Inject abstract ExecOperations getExecOps()
 
   GenerateTemplatesTask() {
     dependsOn(project.configurations.templateProcessor)
@@ -125,7 +127,7 @@ class GenerateTemplatesTask extends DefaultTask {
 
     def result
     outputFile.withOutputStream { output ->
-      result = project.javaexec {
+      result = getExecOps().javaexec {
         classpath project.configurations.templateProcessor
         mainClass = 'com.carrotsearch.hppc.generator.TemplateProcessor'
 
@@ -143,7 +145,7 @@ class GenerateTemplatesTask extends DefaultTask {
           outputDir
         ]
 
-        ignoreExitValue true
+        ignoreExitValue = true
       }
     }
 
@@ -175,6 +177,8 @@ javadoc {
     overview = file("src/main/javadoc/overview.html")
 
     group("HPPC", "com.carrotsearch.hppc*")
+
+    addFileOption("-add-stylesheet", file("src/main/javadoc/resources/custom.css"))
   }
 
   doLast {
@@ -182,14 +186,6 @@ javadoc {
       into file("${destinationDir}/resources")
       from file("src/main/javadoc/resources")
     }
-
-    def cssFile = file("${destinationDir}/stylesheet.css")
-    def css = cssFile.getText("UTF-8")
-    css = """
-@import url('resources/custom.css');
-
-""" + css
-    cssFile.write(css, "UTF-8")
   }
 }
 

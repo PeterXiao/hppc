@@ -13,7 +13,7 @@ allprojects {
     spotless {
       java {
         licenseHeaderFile licenseHeader
-        lineEndings 'UNIX'
+        lineEndings = 'UNIX'
         endWithNewline()
         googleJavaFormat(deps.versions.googleJavaFormat.get())
       }
