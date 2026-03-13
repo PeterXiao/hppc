@@ -10,10 +10,10 @@
 package com.carrotsearch.hppc;
 
 import static com.carrotsearch.hppc.HashContainers.*;
+import static com.carrotsearch.hppc.TestUtils.newIntegerObject;
 import static org.junit.Assert.*;
 
 import com.carrotsearch.randomizedtesting.RandomizedTest;
-import com.carrotsearch.randomizedtesting.annotations.SuppressForbidden;
 import java.util.HashSet;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -53,15 +53,13 @@ public class HashContainersTest extends RandomizedTest {
     assertEquals(0xff, expandAtCount(0x100, 1d));
   }
 
-  @SuppressForbidden("new Integer() intentional.")
-  @SuppressWarnings("deprecation")
   @Test
   public void testAddReplacements() {
     ObjectHashSet<Integer> set = new ObjectHashSet<>();
     HashSet<Integer> reference = new HashSet<>();
 
     Integer i1 = 1;
-    Integer i2 = new Integer(i1.intValue());
+    Integer i2 = newIntegerObject(i1.intValue());
 
     assertTrue(set.add(i1));
     assertTrue(reference.add(i1));

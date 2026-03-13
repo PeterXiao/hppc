@@ -10,6 +10,7 @@
 package com.carrotsearch.hppc.expectations;
 
 import static com.carrotsearch.hppc.TestUtils.assertEquals2;
+import static com.carrotsearch.hppc.TestUtils.newIntegerObject;
 
 import com.carrotsearch.hppc.IntArrayDeque;
 import com.carrotsearch.hppc.IntArrayList;
@@ -30,7 +31,6 @@ import com.carrotsearch.hppc.ObjectObjectHashMap;
 import com.carrotsearch.hppc.ObjectStack;
 import com.carrotsearch.hppc.SortedIterationIntObjectHashMap;
 import com.carrotsearch.randomizedtesting.RandomizedTest;
-import com.carrotsearch.randomizedtesting.annotations.SuppressForbidden;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -120,8 +120,6 @@ public class APIExpectationsTest extends RandomizedTest {
     Assertions.assertThat(l2.equals(l1)).isTrue();
   }
 
-  @SuppressForbidden("new Integer() intentional.")
-  @SuppressWarnings("deprecation")
   @Test
   public void testArrayListEqualsWithOverridenComparisonMethod() {
     class IntegerIdentityList extends ObjectArrayList<Integer> {
@@ -137,7 +135,7 @@ public class APIExpectationsTest extends RandomizedTest {
 
     l1.add(1, 2, 3);
     l2.add(1, 2, 3);
-    l3.add(1, 2, new Integer(3));
+    l3.add(1, 2, newIntegerObject(3));
 
     Assertions.assertThat(l1.hashCode()).isEqualTo(l2.hashCode());
     Assertions.assertThat(l1.hashCode()).isEqualTo(l3.hashCode());
@@ -145,8 +143,6 @@ public class APIExpectationsTest extends RandomizedTest {
     Assertions.assertThat(l1.equals(l3)).isFalse();
   }
 
-  @SuppressForbidden("new Integer() intentional.")
-  @SuppressWarnings("deprecation")
   @Test
   public void testArrayDequeEqualsWithOverridenComparisonMethod() {
     class IntegerIdentityDeque extends ObjectArrayDeque<Integer> {
@@ -162,7 +158,7 @@ public class APIExpectationsTest extends RandomizedTest {
 
     l1.addLast(1, 2, 3);
     l2.addLast(1, 2, 3);
-    l3.addLast(1, 2, new Integer(3));
+    l3.addLast(1, 2, newIntegerObject(3));
 
     Assertions.assertThat(l1.hashCode()).isEqualTo(l2.hashCode());
     Assertions.assertThat(l1.hashCode()).isEqualTo(l3.hashCode());
@@ -237,14 +233,12 @@ public class APIExpectationsTest extends RandomizedTest {
     isTypeArray(Number.class, t.toArray(Number.class));
   }
 
-  @SuppressForbidden("new Integer() intentional.")
-  @SuppressWarnings("deprecation")
   @Test
   public void testPutOrAddOnEqualKeys() {
     ObjectIntHashMap<Integer> map = new ObjectIntHashMap<>();
 
     Integer k1 = 1;
-    Integer k1b = new Integer(k1.intValue());
+    Integer k1b = newIntegerObject(k1.intValue());
 
     Assertions.assertThat(k1).isNotSameAs(k1b);
     assertEquals2(1, map.putOrAdd(k1, 1, 2));

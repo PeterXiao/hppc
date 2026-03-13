@@ -9,9 +9,10 @@
  */
 package com.carrotsearch.hppc;
 
+import static com.carrotsearch.hppc.TestUtils.newIntegerObject;
+
 import com.carrotsearch.randomizedtesting.RandomizedTest;
 import com.carrotsearch.randomizedtesting.annotations.Repeat;
-import com.carrotsearch.randomizedtesting.annotations.SuppressForbidden;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -19,13 +20,11 @@ public class ObjectIdentityHashSetTest extends RandomizedTest {
   /* */
   @Repeat(iterations = 500)
   @Test
-  @SuppressForbidden("Legitimate use of new Integer()")
   public void testHashKeyUsesSystemIdentity() {
     int expectedElements = 200;
     ObjectIdentityHashSet<Integer> foo = new ObjectIdentityHashSet<>(expectedElements);
     for (int i = 0; i < expectedElements; i++) {
-      @SuppressWarnings("deprecation")
-      Integer v2 = new Integer(44);
+      Integer v2 = newIntegerObject(44);
       foo.add(v2);
     }
 
