@@ -7,7 +7,7 @@ configure(rootProject) {
 }
 
 allprojects {
-  project.apply plugin: deps.plugins.spotless.get().pluginId
+  project.apply plugin: libs.plugins.spotless.get().pluginId
 
   plugins.withType(JavaPlugin) {
     spotless {
@@ -15,7 +15,7 @@ allprojects {
         licenseHeaderFile licenseHeader
         lineEndings = 'UNIX'
         endWithNewline()
-        googleJavaFormat(deps.versions.googleJavaFormat.get())
+        googleJavaFormat(libs.versions.googleJavaFormat.get())
       }
     }
   }
@@ -24,7 +24,7 @@ allprojects {
     groovyGradle {
       target '*.gradle', 'gradle/**/*.gradle'
 
-      greclipse(deps.versions.greclipse.get()).configFile rootProject.files(
+      greclipse(libs.versions.greclipse.get()).configFile rootProject.files(
           'gradle/validation/spotless/spotless.eclipseformat.xml',
           'gradle/validation/spotless/spotless.groovyformat.prefs')
     }

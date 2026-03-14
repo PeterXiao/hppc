@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
   testImplementation project(":hppc")
-  testImplementation deps.randomizedtesting.runner
-  testImplementation deps.assertj
+  testImplementation libs.randomizedtesting.runner
+  testImplementation libs.assertj
 }
 
 test {

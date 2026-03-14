@@ -1,6 +1,6 @@
 plugins {
   id 'java-library'
-  alias(deps.plugins.spotless)
+  alias(libs.plugins.spotless)
 }
 
 sourceSets {
@@ -29,6 +29,7 @@ configurations {
   templateProcessor
   templatesImplementation.extendsFrom implementation
   testTemplatesImplementation.extendsFrom templatesImplementation, testImplementation
+  testTemplatesRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 dependencies {
@@ -36,8 +37,8 @@ dependencies {
 
   templatesImplementation project(":hppc-template-intrinsics")
 
-  testImplementation deps.randomizedtesting.runner
-  testImplementation deps.assertj
+  testImplementation libs.randomizedtesting.runner
+  testImplementation libs.assertj
 }
 
 task generateMainTemplates(type: GenerateTemplatesTask) {
@@ -70,7 +71,7 @@ spotless {
 
     lineEndings = 'UNIX'
     endWithNewline()
-    googleJavaFormat(deps.versions.googleJavaFormat.get())
+    googleJavaFormat(libs.versions.googleJavaFormat.get())
   })
 }
 
@@ -95,7 +96,7 @@ task testTemplates(type: Test) {
   description = 'Runs source template tests.'
   group = 'verification'
 
-  useJUnit()
+  useJUnitPlatform()
 
   testClassesDirs = sourceSets.testTemplates.output.classesDirs
   classpath = sourceSets.testTemplates.runtimeClasspath

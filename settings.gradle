@@ -1,11 +1,3 @@
-dependencyResolutionManagement {
-  versionCatalogs {
-    deps {
-      from(files('versions.toml'))
-    }
-  }
-}
-
 rootProject.name = 'hppc-root'
 
 include 'hppc-template-intrinsics'

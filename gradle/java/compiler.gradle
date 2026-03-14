@@ -1,4 +1,4 @@
-def minJavaVersion = JavaVersion.toVersion(deps.versions.minJava.get())
+def minJavaVersion = JavaVersion.toVersion(libs.versions.minJava.get())
 
 allprojects {
   plugins.withType(JavaPlugin).configureEach {

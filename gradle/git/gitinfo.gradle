@@ -7,8 +7,8 @@ buildscript {
   }
 
   dependencies {
-    classpath deps.jgit
-    classpath deps.commons.codec
+    classpath libs.jgit
+    classpath libs.commons.codec
   }
 }
 

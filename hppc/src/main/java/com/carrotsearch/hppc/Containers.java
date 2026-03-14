@@ -45,6 +45,7 @@ public final class Containers {
    * @see "https://github.com/carrotsearch/randomizedtesting"
    */
   @SuppressForbidden
+  @SuppressWarnings({"deprecation", "removal"})
   public static long randomSeed64() {
     if (testsSeedProperty == null) {
       try {

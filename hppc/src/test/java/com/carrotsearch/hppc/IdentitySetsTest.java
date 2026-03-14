@@ -9,28 +9,26 @@
  */
 package com.carrotsearch.hppc;
 
+import static com.carrotsearch.hppc.TestUtils.newIntegerObject;
 import static org.junit.Assert.*;
 
-import com.carrotsearch.randomizedtesting.annotations.SuppressForbidden;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 public class IdentitySetsTest {
-  @SuppressForbidden("new Integer() intentional.")
-  @SuppressWarnings("deprecation")
   @Test
   public void testSanity() {
     ObjectIdentityHashSet<Integer> m1 = new ObjectIdentityHashSet<>();
 
     Integer a, b;
-    Assertions.assertThat(m1.add(a = new Integer(1))).isTrue();
+    Assertions.assertThat(m1.add(a = newIntegerObject(1))).isTrue();
     Assertions.assertThat(m1.add(a)).isFalse();
-    Assertions.assertThat(m1.add(b = new Integer(1))).isTrue();
+    Assertions.assertThat(m1.add(b = newIntegerObject(1))).isTrue();
     Assertions.assertThat(m1.add(b)).isFalse();
 
     Assertions.assertThat(m1.contains(a)).isTrue();
     Assertions.assertThat(m1.contains(b)).isTrue();
-    Assertions.assertThat(m1.contains(new Integer(1))).isFalse();
+    Assertions.assertThat(m1.contains(newIntegerObject(1))).isFalse();
 
     Assertions.assertThat(m1.contains(null)).isFalse();
     Assertions.assertThat(m1.add(null)).isTrue();

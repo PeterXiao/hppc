@@ -11,6 +11,7 @@ package com.carrotsearch.hppc;
 
 import static org.junit.Assert.*;
 
+import com.carrotsearch.randomizedtesting.annotations.SuppressForbidden;
 import java.util.Arrays;
 
 /** Test utilities. */
@@ -299,6 +300,16 @@ public abstract class TestUtils {
       result[i] = (byte) elements[i];
     }
     return result;
+  }
+
+  /**
+   * Creates a new, identity-distinct {@link Integer} object. Uses the deprecated constructor
+   * intentionally to guarantee a fresh heap allocation (bypassing the integer cache).
+   */
+  @SuppressForbidden("new Integer() intentional: creates identity-distinct instances")
+  @SuppressWarnings("removal")
+  public static Integer newIntegerObject(int value) {
+    return new Integer(value);
   }
 
   /** Override for generated templates. */

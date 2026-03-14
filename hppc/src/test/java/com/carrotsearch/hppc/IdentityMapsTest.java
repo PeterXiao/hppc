@@ -9,21 +9,20 @@
  */
 package com.carrotsearch.hppc;
 
+import static com.carrotsearch.hppc.TestUtils.newIntegerObject;
 import static org.junit.Assert.*;
 
 import com.carrotsearch.randomizedtesting.annotations.SuppressForbidden;
 import org.junit.Test;
 
 public class IdentityMapsTest {
-  @SuppressForbidden("new Integer() intentional")
-  @SuppressWarnings("deprecation")
   @Test
   public void testSanity() {
     ObjectCharIdentityHashMap<Integer> m1 = new ObjectCharIdentityHashMap<>();
 
     Integer a, b;
-    m1.put(a = new Integer(1), 'a');
-    m1.put(b = new Integer(1), 'b');
+    m1.put(a = newIntegerObject(1), 'a');
+    m1.put(b = newIntegerObject(1), 'b');
 
     assertEquals('a', m1.get(a));
     assertEquals('b', m1.get(b));
@@ -37,7 +36,7 @@ public class IdentityMapsTest {
     assertEquals(m2, m1);
 
     m2.remove(a);
-    m2.put(new Integer(1), 'a');
+    m2.put(newIntegerObject(1), 'a');
     assertNotEquals(m1, m2);
     assertNotEquals(m2, m1);
   }
@@ -67,7 +66,7 @@ public class IdentityMapsTest {
   }
 
   @SuppressForbidden("new Double() intentional")
-  @SuppressWarnings("deprecation")
+  @SuppressWarnings("removal")
   @Test
   public void testNaNsInValues() {
     ObjectDoubleIdentityHashMap<String> m1 = new ObjectDoubleIdentityHashMap<>();
