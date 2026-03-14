@@ -5,6 +5,8 @@
 
    GH-255: Gradle upgrade. Dependency upgrades. (Dawid Weiss)
 
+   GH-255: JUnit Platform + JUnit vintage is now used to run the tests.
+
    GH-255: Minimum Java bumped to 17 (from 11). (Dawid Weiss)
 
 [0.10.0]
