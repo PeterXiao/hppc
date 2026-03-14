@@ -13,14 +13,14 @@ configurations {
 dependencies {
   api project(":hppc-template-intrinsics")
 
-  implementation deps.antlr.runtime
-  implementation deps.velocity
-  implementation deps.carrotsearch.console.launcher
+  implementation libs.antlr.runtime
+  implementation libs.velocity
+  implementation libs.carrotsearch.console.launcher
 
-  testImplementation deps.randomizedtesting.runner
-  testImplementation deps.assertj
+  testImplementation libs.randomizedtesting.runner
+  testImplementation libs.assertj
 
-  antlr deps.antlr.base
+  antlr libs.antlr.base
 }
 
 sourceSets {

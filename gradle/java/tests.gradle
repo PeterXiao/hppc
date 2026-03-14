@@ -2,12 +2,12 @@ import org.gradle.api.tasks.testing.logging.*
 
 allprojects {
   plugins.withType(JavaPlugin) {
-    project.apply plugin: deps.plugins.randomizedtesting.get().pluginId
+    project.apply plugin: libs.plugins.randomizedtesting.get().pluginId
 
     dependencies {
-      testImplementation deps.junit.jupiter
-      testRuntimeOnly deps.junit.vintage.engine
-      testRuntimeOnly deps.junit.platform.launcher
+      testImplementation libs.junit.jupiter
+      testRuntimeOnly libs.junit.vintage.engine
+      testRuntimeOnly libs.junit.platform.launcher
       constraints {
         testImplementation("junit:junit:4.13.2") {
           because "align JUnit 4 version across compile and runtime classpaths"

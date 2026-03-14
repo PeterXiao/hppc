@@ -1,5 +1,5 @@
 allprojects {
-  apply plugin: deps.plugins.dependencychecks.get().pluginId
+  apply plugin: libs.plugins.dependencychecks.get().pluginId
 
   def mainConfigurations = project.configurations.matching {
     it.name in [
@@ -41,7 +41,7 @@ allprojects {
 
 // Configure version catalog cleanups plugin.
 configure(rootProject) {
-  apply plugin: deps.plugins.versionCatalogUpdate.get().pluginId
+  apply plugin: libs.plugins.versionCatalogUpdate.get().pluginId
 
   versionCatalogUpdate {
     sortByKey = true
@@ -54,18 +54,18 @@ configure(rootProject) {
   }
 
   tasks.matching { it.name == "tidy" }.configureEach {
-    it.dependsOn(":versionCatalogFormatDeps")
+    it.dependsOn(":versionCatalogFormat")
   }
 
   tasks.matching {
     it.path in [
-      ":versionCatalogUpdateDeps"
+      ":versionCatalogUpdate"
     ]
   }.configureEach {
     it.interactive = true
   }
 
   tasks.register("updateDeps", {
-    dependsOn ":versionCatalogUpdateDeps"
+    dependsOn ":versionCatalogUpdate"
   })
 }

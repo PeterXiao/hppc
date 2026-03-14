@@ -1,17 +1,17 @@
 plugins {
   id 'java-library'
-  alias(deps.plugins.jmh)
+  alias(libs.plugins.jmh)
 }
 
 dependencies {
   implementation project(":hppc")
 
-  implementation deps.fastutil
-  implementation deps.koloboke
-  implementation deps.jmh.core
+  implementation libs.fastutil
+  implementation libs.koloboke
+  implementation libs.jmh.core
 
-  jmh deps.jmh.core
-  jmh deps.jmh.generator.annprocess
+  jmh libs.jmh.core
+  jmh libs.jmh.generator.annprocess
 }
 
 jmh {
