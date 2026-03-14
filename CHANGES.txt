@@ -3,9 +3,9 @@
 
 ** New features and API changes
 
-   * Java 17 is the minimum required version now.
+   GH-255: Gradle upgrade. Dependency upgrades. (Dawid Weiss)
 
-   * Switched to junit jupiter for running tests.
+   GH-255: Minimum Java bumped to 17 (from 11). (Dawid Weiss)
 
 [0.10.0]
 
